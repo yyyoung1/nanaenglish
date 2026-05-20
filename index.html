@@ -861,7 +861,7 @@ const DATA = {
   ],
   consonants: {
     voiceless1: {
-      label: '清辅音 · 不振动声带，气流更轻更短',
+      label: '清辅音',
       items: [
         { ipa:'/p/', phoneme:{t:'s', cue:'puh'}, word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
         { ipa:'/t/', phoneme:{t:'s', cue:'tuh'}, word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
@@ -872,7 +872,7 @@ const DATA = {
       ]
     },
     voiced1: {
-      label: '浊辅音 · 声带振动，声音更饱满',
+      label: '浊辅音',
       items: [
         { ipa:'/b/', phoneme:{t:'s', cue:'buh'}, word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
         { ipa:'/d/', phoneme:{t:'s', cue:'duh'}, word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
@@ -883,7 +883,7 @@ const DATA = {
       ]
     },
     voiceless2: {
-      label: '清辅音 · 摩擦和破擦组合',
+      label: '清辅音',
       items: [
         { ipa:'/ʃ/', phoneme:{t:'s', cue:'shh'},    word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
         { ipa:'/h/', phoneme:{t:'s', cue:'huh'},    word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
@@ -893,7 +893,7 @@ const DATA = {
       ]
     },
     voiced2: {
-      label: '浊辅音 · 摩擦和破擦组合',
+      label: '浊辅音',
       items: [
         { ipa:'/ʒ/', phoneme:{t:'s', cue:'vision'}, word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
         { ipa:'/r/', phoneme:{t:'s', cue:'ruh'}, word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
@@ -911,20 +911,30 @@ const DATA = {
       ]
     },
     approximants: {
-      label: '近音 · 发音器官接近但不完全阻塞，气流顺畅',
+      label: '半元音',
       items: [
         { ipa:'/w/', phoneme:{t:'s', cue:'wuh'}, word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
         { ipa:'/j/', phoneme:{t:'s', cue:'yuh'}, word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
       ]
     },
     lateral: {
-      label: '舌边音 · 气流从舌头两侧流出',
+      label: '舌边音',
       items: [
         { ipa:'/l/', phoneme:{t:'s', cue:'luh'}, word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
       ]
     }
   }
 };
+
+const CONSONANT_ORDER = [
+  'voiceless1',
+  'voiced1',
+  'voiceless2',
+  'voiced2',
+  'nasals',
+  'approximants',
+  'lateral',
+];
 
 /* ═══════════════════════════════════════════════════════
    PHONEME FORMANT SYNTHESIZER  (Web Audio API)
@@ -1015,6 +1025,11 @@ const LONG_VOWEL_AUDIO = {
   '/ɜː/': 'Open-mid_central_unrounded_vowel.ogg',
   '/iː/': 'Close_front_unrounded_vowel.ogg',
   '/uː/': 'Close_back_rounded_vowel.ogg',
+};
+const SHORT_VOWEL_FIX_AUDIO = {
+  '/ɒ/': 'PR-open_back_rounded_vowel.ogg',
+  '/ə/': 'Mid-central_vowel.ogg',
+  '/ɪ/': 'Near-close_near-front_unrounded_vowel.ogg',
 };
 const PHONEME_AUDIO = {
   '/ʌ/': 'assets/audio/phonemes/uh-short.mp3',
@@ -1161,7 +1176,7 @@ function playPhoneme(ph, cardEl) {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   clearCurrent();
   const p = ph.phoneme;
-  const wiki = LONG_VOWEL_AUDIO[ph.ipa];
+  const wiki = LONG_VOWEL_AUDIO[ph.ipa] || SHORT_VOWEL_FIX_AUDIO[ph.ipa];
   const src = PHONEME_AUDIO[ph.ipa];
 
   if (wiki) {
@@ -1270,7 +1285,7 @@ function renderAll() {
 
   // Consonants (grouped)
   const cc = document.getElementById('consonants-container');
-  Object.values(DATA.consonants).forEach((group, gi) => {
+  CONSONANT_ORDER.map(key => DATA.consonants[key]).forEach((group, gi) => {
     const div = document.createElement('div');
     div.className = 'section-divider';
     div.innerHTML = `<span class="section-divider-label">${group.label}</span><div class="section-divider-line"></div>`;
