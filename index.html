@@ -829,8 +829,8 @@
 /* ═══════════════════════════════════════════════════════
    PHONEME DATA  (44 total)
 ═══════════════════════════════════════════════════════ */
-// phoneme.t: 'v'=vowel, 'd'=diphthong (formant synth fallback), 's'=consonant TTS fallback
-// phoneme.wiki: Wikimedia Commons filename → real human IPA recording
+// phoneme.t: 'v'=vowel, 'd'=diphthong word recording, 's'=short consonant teaching cue
+// phoneme.wiki: Wikimedia Commons filename → real human recording
 const DATA = {
   shortVowels: [
     { ipa:'/ɪ/', phoneme:{t:'v', f1:427, f2:2303, dur:0.28, wiki:'Near-close_near-front_unrounded_vowel.ogg'}, word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
@@ -849,64 +849,64 @@ const DATA = {
     { ipa:'/uː/', phoneme:{t:'v', f1:370, f2: 950, dur:0.50, wiki:'Close_back_rounded_vowel.ogg'},              word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
   ],
   diphthongs: [
-    // tts: minimal English word/letter whose vowel IS the diphthong (human TTS, no formant synth)
-    { ipa:'/eɪ/', phoneme:{t:'d', tts:'A',   f1s:621,f2s:2212, f1e:427,f2e:2303, dur:0.52}, word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
-    { ipa:'/aɪ/', phoneme:{t:'d', tts:'I',   f1s:850,f2s:1600, f1e:427,f2e:2303, dur:0.52}, word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
-    { ipa:'/ɔɪ/', phoneme:{t:'d', tts:'oy',  f1s:590,f2s: 940, f1e:427,f2e:2303, dur:0.52}, word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
-    { ipa:'/əʊ/', phoneme:{t:'d', tts:'O',   f1s:520,f2s:1490, f1e:459,f2e:1105, dur:0.52}, word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
-    { ipa:'/aʊ/', phoneme:{t:'d', tts:'ow',  f1s:850,f2s:1600, f1e:459,f2e:1105, dur:0.52}, word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
-    { ipa:'/ɪə/', phoneme:{t:'d', tts:'ear', f1s:427,f2s:2303, f1e:520,f2e:1490, dur:0.52}, word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
-    { ipa:'/eə/', phoneme:{t:'d', tts:'air', f1s:621,f2s:2212, f1e:520,f2e:1490, dur:0.52}, word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
-    { ipa:'/ʊə/', phoneme:{t:'d', tts:'tour',f1s:459,f2s:1105, f1e:520,f2e:1490, dur:0.52}, word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
+    // Real word recordings: clearer than synthesized glides, with the target diphthong highlighted.
+    { ipa:'/eɪ/', phoneme:{t:'d', wiki:'En-us-day.ogg',   cue:'day'},   word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
+    { ipa:'/aɪ/', phoneme:{t:'d', wiki:'En-us-my.ogg',    cue:'my'},    word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
+    { ipa:'/ɔɪ/', phoneme:{t:'d', wiki:'En-us-boy.ogg',   cue:'boy'},   word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
+    { ipa:'/əʊ/', phoneme:{t:'d', wiki:'En-us-go.ogg',    cue:'go'},    word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
+    { ipa:'/aʊ/', phoneme:{t:'d', wiki:'En-us-now.ogg',   cue:'now'},   word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
+    { ipa:'/ɪə/', phoneme:{t:'d', wiki:'En-us-here.ogg',  cue:'here'},  word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
+    { ipa:'/eə/', phoneme:{t:'d', wiki:'En-uk-air.ogg',   cue:'air'},   word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
+    { ipa:'/ʊə/', phoneme:{t:'d', wiki:'En-us-tour.ogg',  cue:'tour'},  word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
   ],
   consonants: {
     plosives: {
       label: '爆破音 · 气流在口腔积累，然后突然冲出',
       items: [
-        { ipa:'/p/', phoneme:{t:'s', text:'pa', wiki:'Voiceless_bilabial_plosive.ogg'},         word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
-        { ipa:'/b/', phoneme:{t:'s', text:'ba', wiki:'Voiced_bilabial_plosive.ogg'},             word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
-        { ipa:'/t/', phoneme:{t:'s', text:'ta', wiki:'Voiceless_alveolar_plosive.ogg'},         word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
-        { ipa:'/d/', phoneme:{t:'s', text:'da', wiki:'Voiced_alveolar_plosive.ogg'},             word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
-        { ipa:'/k/', phoneme:{t:'s', text:'ka', wiki:'Voiceless_velar_plosive.ogg'},             word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
-        { ipa:'/g/', phoneme:{t:'s', text:'ga', wiki:'Voiced_velar_plosive_02.ogg'},             word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
+        { ipa:'/p/', phoneme:{t:'s', cue:'puh'}, word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
+        { ipa:'/b/', phoneme:{t:'s', cue:'buh'}, word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
+        { ipa:'/t/', phoneme:{t:'s', cue:'tuh'}, word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
+        { ipa:'/d/', phoneme:{t:'s', cue:'duh'}, word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
+        { ipa:'/k/', phoneme:{t:'s', cue:'kuh'}, word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
+        { ipa:'/g/', phoneme:{t:'s', cue:'guh'}, word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
       ]
     },
     fricatives: {
       label: '摩擦音 · 气流通过狭窄通道产生摩擦声',
       items: [
-        { ipa:'/f/', phoneme:{t:'s', text:'fff',   wiki:'Voiceless_labio-dental_fricative.ogg'},  word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
-        { ipa:'/v/', phoneme:{t:'s', text:'vvv',   wiki:'Voiced_labio-dental_fricative.ogg'},    word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
-        { ipa:'/θ/', phoneme:{t:'s', text:'thin',  wiki:'Voiceless_dental_fricative.ogg'},        word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
-        { ipa:'/ð/', phoneme:{t:'s', text:'the',   wiki:'Voiced_dental_fricative.ogg'},           word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
-        { ipa:'/s/', phoneme:{t:'s', text:'sss',   wiki:'Voiceless_alveolar_sibilant.ogg'},       word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
-        { ipa:'/z/', phoneme:{t:'s', text:'zzz',   wiki:'Voiced_alveolar_sibilant.ogg'},          word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
-        { ipa:'/ʃ/', phoneme:{t:'s', text:'shh',   wiki:'Voiceless_palato-alveolar_sibilant.ogg'},word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
-        { ipa:'/ʒ/', phoneme:{t:'s', text:'genre', wiki:'Voiced_palato-alveolar_sibilant.ogg'},   word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
-        { ipa:'/h/', phoneme:{t:'s', text:'ha',    wiki:'Voiceless_glottal_fricative.ogg'},       word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
+        { ipa:'/f/', phoneme:{t:'s', cue:'fff'},    word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
+        { ipa:'/v/', phoneme:{t:'s', cue:'vvv'},    word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
+        { ipa:'/θ/', phoneme:{t:'s', cue:'thin'},   word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
+        { ipa:'/ð/', phoneme:{t:'s', cue:'this'},   word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
+        { ipa:'/s/', phoneme:{t:'s', cue:'sss'},    word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
+        { ipa:'/z/', phoneme:{t:'s', cue:'zzz'},    word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
+        { ipa:'/ʃ/', phoneme:{t:'s', cue:'shh'},    word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
+        { ipa:'/ʒ/', phoneme:{t:'s', cue:'vision'}, word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
+        { ipa:'/h/', phoneme:{t:'s', cue:'huh'},    word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
       ]
     },
     affricates: {
       label: '破擦音 · 爆破音 + 摩擦音的组合',
       items: [
-        { ipa:'/tʃ/', phoneme:{t:'s', text:'ch', wiki:'Voiceless_palato-alveolar_affricate.ogg'}, word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
-        { ipa:'/dʒ/', phoneme:{t:'s', text:'ja', wiki:'Voiced_palato-alveolar_affricate.ogg'},   word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
+        { ipa:'/tʃ/', phoneme:{t:'s', cue:'chuh'}, word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
+        { ipa:'/dʒ/', phoneme:{t:'s', cue:'juh'},  word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
       ]
     },
     nasals: {
       label: '鼻音 · 气流从鼻腔通过产生共鸣',
       items: [
-        { ipa:'/m/', phoneme:{t:'s', text:'mmm',  wiki:'Bilabial_nasal.ogg'},                    word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
-        { ipa:'/n/', phoneme:{t:'s', text:'nnn',  wiki:'Alveolar_nasal.ogg'},                    word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
-        { ipa:'/ŋ/', phoneme:{t:'s', text:'ring', wiki:'Velar_nasal.ogg'},                       word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
+        { ipa:'/m/', phoneme:{t:'s', cue:'mmm'},  word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
+        { ipa:'/n/', phoneme:{t:'s', cue:'nnn'},  word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
+        { ipa:'/ŋ/', phoneme:{t:'s', cue:'sing'}, word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
       ]
     },
     approximants: {
       label: '近音 · 发音器官接近但不完全阻塞，气流顺畅',
       items: [
-        { ipa:'/l/', phoneme:{t:'s', text:'la',  wiki:'Alveolar_lateral_approximant.ogg'},       word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
-        { ipa:'/r/', phoneme:{t:'s', text:'rrr', wiki:'Alveolar_approximant.ogg'},               word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
-        { ipa:'/j/', phoneme:{t:'s', text:'ya',  wiki:'Palatal_approximant.ogg'},                word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
-        { ipa:'/w/', phoneme:{t:'s', text:'wa',  wiki:'Voiced_labio-velar_approximant.ogg'},     word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
+        { ipa:'/l/', phoneme:{t:'s', cue:'luh'}, word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
+        { ipa:'/r/', phoneme:{t:'s', cue:'ruh'}, word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
+        { ipa:'/j/', phoneme:{t:'s', cue:'yuh'}, word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
+        { ipa:'/w/', phoneme:{t:'s', cue:'wuh'}, word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
       ]
     }
   }
@@ -990,7 +990,11 @@ const synth = (() => {
 })();
 
 /* ═══════════════════════════════════════════════════════
-   WEB SPEECH API  (used for consonants + example words)
+   AUDIO PLAYBACK
+   - long vowels: Wikimedia IPA recordings
+   - short vowels: same recordings, hard-cut shorter
+   - diphthongs: Wikimedia word recordings with the target glide
+   - consonants: short female teaching cues
 ═══════════════════════════════════════════════════════ */
 const WIKI_BASE = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
 let voices = [];
@@ -1033,8 +1037,8 @@ function clearCurrent() {
   }
 }
 
-// Play Wikimedia IPA audio. shortCutMs: pause after N ms (for short vowels).
-function playWikiAudio(wiki, cardEl, shortCutMs) {
+// Play Wikimedia audio. shortCutMs: pause after N ms when the recording is too long.
+function playWikiAudio(wiki, cardEl, shortCutMs, fallback) {
   const audio = new Audio(WIKI_BASE + encodeURIComponent(wiki));
   currentAudio = audio;
   cardEl.classList.add('playing-phoneme');
@@ -1048,27 +1052,44 @@ function playWikiAudio(wiki, cardEl, shortCutMs) {
   };
 
   audio.onended = cleanup;
-  audio.onerror = cleanup;
-  audio.play().catch(cleanup);
+  audio.onerror = () => {
+    cleanup();
+    if (fallback) fallback();
+  };
+  audio.play().catch(() => {
+    cleanup();
+    if (fallback) fallback();
+  });
 
   if (shortCutMs) {
     phonemeTimer = setTimeout(() => { audio.pause(); cleanup(); }, shortCutMs);
   }
 }
 
-// Play diphthong via TTS using a minimal English word that contains the diphthong sound
-function playDiphthongTTS(text, cardEl) {
+function playTeachingCue(text, cardEl, opts = {}) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'en-US'; utt.rate = 0.72; utt.pitch = 1.08; utt.volume = 1.0;
+  utt.lang = opts.lang || 'en-US';
+  utt.rate = opts.rate || 0.84;
+  utt.pitch = opts.pitch || 1.08;
+  utt.volume = 1.0;
   const v = getBestFemaleVoice(); if (v) utt.voice = v;
   utt.onstart = () => { cardEl.classList.add('playing-phoneme'); currentCard = cardEl; };
-  utt.onend = utt.onerror = () => {
+  const cleanup = () => {
+    if (phonemeTimer) { clearTimeout(phonemeTimer); phonemeTimer = null; }
     cardEl.classList.remove('playing-phoneme');
     if (currentCard === cardEl) currentCard = null;
   };
+  utt.onend = utt.onerror = cleanup;
   window.speechSynthesis.speak(utt);
+
+  if (opts.cutMs) {
+    phonemeTimer = setTimeout(() => {
+      window.speechSynthesis.cancel();
+      cleanup();
+    }, opts.cutMs);
+  }
 }
 
 // Play the phoneme sound
@@ -1077,16 +1098,21 @@ function playPhoneme(ph, cardEl) {
   clearCurrent();
   const p = ph.phoneme;
 
-  if (p.wiki) {
-    // Short vowels (dur ≤ 0.3s): cap at 340ms so they sound brief
-    const cut = (p.dur && p.dur <= 0.3) ? 340 : null;
+  if (p.t === 'v' && p.wiki) {
+    // Short vowels must stay short. Long vowels are intentionally unchanged.
+    const cut = (p.dur && p.dur <= 0.3) ? 230 : null;
     playWikiAudio(p.wiki, cardEl, cut);
     return;
   }
 
-  // Diphthongs: TTS with a minimal English word that IS the diphthong
-  if (p.t === 'd' && p.tts) {
-    playDiphthongTTS(p.tts, cardEl);
+  if (p.t === 'd' && p.wiki) {
+    // Real word recordings are more natural than generated glide sounds.
+    playWikiAudio(p.wiki, cardEl, 900, () => playTeachingCue(p.cue, cardEl, { rate: 0.76 }));
+    return;
+  }
+
+  if (p.t === 's' && p.cue) {
+    playTeachingCue(p.cue, cardEl, { rate: 0.88, cutMs: 620 });
   }
 }
 
