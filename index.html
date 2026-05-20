@@ -849,15 +849,15 @@ const DATA = {
     { ipa:'/uː/', phoneme:{t:'v', f1:370, f2: 950, dur:0.50, wiki:'Close_back_rounded_vowel.ogg'},              word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
   ],
   diphthongs: [
-    // Diphthongs: no standard IPA isolated recording, use formant synthesis
-    { ipa:'/eɪ/', phoneme:{t:'d', f1s:621,f2s:2212, f1e:427,f2e:2303, dur:0.52}, word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
-    { ipa:'/aɪ/', phoneme:{t:'d', f1s:850,f2s:1600, f1e:427,f2e:2303, dur:0.52}, word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
-    { ipa:'/ɔɪ/', phoneme:{t:'d', f1s:590,f2s: 940, f1e:427,f2e:2303, dur:0.52}, word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
-    { ipa:'/əʊ/', phoneme:{t:'d', f1s:520,f2s:1490, f1e:459,f2e:1105, dur:0.52}, word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
-    { ipa:'/aʊ/', phoneme:{t:'d', f1s:850,f2s:1600, f1e:459,f2e:1105, dur:0.52}, word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
-    { ipa:'/ɪə/', phoneme:{t:'d', f1s:427,f2s:2303, f1e:520,f2e:1490, dur:0.52}, word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
-    { ipa:'/eə/', phoneme:{t:'d', f1s:621,f2s:2212, f1e:520,f2e:1490, dur:0.52}, word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
-    { ipa:'/ʊə/', phoneme:{t:'d', f1s:459,f2s:1105, f1e:520,f2e:1490, dur:0.52}, word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
+    // tts: minimal English word/letter whose vowel IS the diphthong (human TTS, no formant synth)
+    { ipa:'/eɪ/', phoneme:{t:'d', tts:'A',   f1s:621,f2s:2212, f1e:427,f2e:2303, dur:0.52}, word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
+    { ipa:'/aɪ/', phoneme:{t:'d', tts:'I',   f1s:850,f2s:1600, f1e:427,f2e:2303, dur:0.52}, word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
+    { ipa:'/ɔɪ/', phoneme:{t:'d', tts:'oy',  f1s:590,f2s: 940, f1e:427,f2e:2303, dur:0.52}, word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
+    { ipa:'/əʊ/', phoneme:{t:'d', tts:'O',   f1s:520,f2s:1490, f1e:459,f2e:1105, dur:0.52}, word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
+    { ipa:'/aʊ/', phoneme:{t:'d', tts:'ow',  f1s:850,f2s:1600, f1e:459,f2e:1105, dur:0.52}, word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
+    { ipa:'/ɪə/', phoneme:{t:'d', tts:'ear', f1s:427,f2s:2303, f1e:520,f2e:1490, dur:0.52}, word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
+    { ipa:'/eə/', phoneme:{t:'d', tts:'air', f1s:621,f2s:2212, f1e:520,f2e:1490, dur:0.52}, word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
+    { ipa:'/ʊə/', phoneme:{t:'d', tts:'tour',f1s:459,f2s:1105, f1e:520,f2e:1490, dur:0.52}, word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
   ],
   consonants: {
     plosives: {
@@ -1033,51 +1033,60 @@ function clearCurrent() {
   }
 }
 
-// Play the phoneme sound: Wikimedia real IPA audio → formant synth fallback for diphthongs
+// Play Wikimedia IPA audio. shortCutMs: pause after N ms (for short vowels).
+function playWikiAudio(wiki, cardEl, shortCutMs) {
+  const audio = new Audio(WIKI_BASE + encodeURIComponent(wiki));
+  currentAudio = audio;
+  cardEl.classList.add('playing-phoneme');
+  currentCard = cardEl;
+
+  const cleanup = () => {
+    cardEl.classList.remove('playing-phoneme');
+    if (currentCard === cardEl) currentCard = null;
+    if (currentAudio === audio) currentAudio = null;
+    if (phonemeTimer) { clearTimeout(phonemeTimer); phonemeTimer = null; }
+  };
+
+  audio.onended = cleanup;
+  audio.onerror = cleanup;
+  audio.play().catch(cleanup);
+
+  if (shortCutMs) {
+    phonemeTimer = setTimeout(() => { audio.pause(); cleanup(); }, shortCutMs);
+  }
+}
+
+// Play diphthong via TTS using a minimal English word that contains the diphthong sound
+function playDiphthongTTS(text, cardEl) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US'; utt.rate = 0.72; utt.pitch = 1.08; utt.volume = 1.0;
+  const v = getBestFemaleVoice(); if (v) utt.voice = v;
+  utt.onstart = () => { cardEl.classList.add('playing-phoneme'); currentCard = cardEl; };
+  utt.onend = utt.onerror = () => {
+    cardEl.classList.remove('playing-phoneme');
+    if (currentCard === cardEl) currentCard = null;
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+// Play the phoneme sound
 function playPhoneme(ph, cardEl) {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   clearCurrent();
   const p = ph.phoneme;
 
   if (p.wiki) {
-    const audio = new Audio(WIKI_BASE + encodeURIComponent(p.wiki));
-    currentAudio = audio;
-    cardEl.classList.add('playing-phoneme');
-    currentCard = cardEl;
-    const cleanup = () => {
-      cardEl.classList.remove('playing-phoneme');
-      if (currentCard === cardEl) currentCard = null;
-      if (currentAudio === audio) currentAudio = null;
-    };
-    audio.onended = cleanup;
-    audio.onerror = () => {
-      cleanup();
-      // fallback: formant synth for vowels, silent fail for consonants
-      if (p.t === 'v') {
-        synth.vowel(p.f1, p.f2, p.dur);
-        cardEl.classList.add('playing-phoneme');
-        currentCard = cardEl;
-        phonemeTimer = setTimeout(() => {
-          cardEl.classList.remove('playing-phoneme');
-          if (currentCard === cardEl) currentCard = null;
-          phonemeTimer = null;
-        }, (p.dur + 0.15) * 1000);
-      }
-    };
-    audio.play().catch(cleanup);
+    // Short vowels (dur ≤ 0.3s): cap at 340ms so they sound brief
+    const cut = (p.dur && p.dur <= 0.3) ? 340 : null;
+    playWikiAudio(p.wiki, cardEl, cut);
     return;
   }
 
-  // Diphthongs: formant synthesis (no wiki recording available)
-  if (p.t === 'd') {
-    synth.diphthong(p.f1s, p.f2s, p.f1e, p.f2e, p.dur);
-    cardEl.classList.add('playing-phoneme');
-    currentCard = cardEl;
-    phonemeTimer = setTimeout(() => {
-      cardEl.classList.remove('playing-phoneme');
-      if (currentCard === cardEl) currentCard = null;
-      phonemeTimer = null;
-    }, (p.dur + 0.15) * 1000);
+  // Diphthongs: TTS with a minimal English word that IS the diphthong
+  if (p.t === 'd' && p.tts) {
+    playDiphthongTTS(p.tts, cardEl);
   }
 }
 
