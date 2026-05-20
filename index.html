@@ -829,26 +829,27 @@
 /* ═══════════════════════════════════════════════════════
    PHONEME DATA  (44 total)
 ═══════════════════════════════════════════════════════ */
-// phoneme.t: 'v'=vowel (formant synth), 'd'=diphthong (gliding formants), 's'=speech (TTS)
-// Formant values (Hz) based on Hillenbrand 1995 female speaker averages + RP British data
+// phoneme.t: 'v'=vowel, 'd'=diphthong (formant synth fallback), 's'=consonant TTS fallback
+// phoneme.wiki: Wikimedia Commons filename → real human IPA recording
 const DATA = {
   shortVowels: [
-    { ipa:'/ɪ/', phoneme:{t:'v', f1:427, f2:2303, dur:0.28}, word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
-    { ipa:'/e/', phoneme:{t:'v', f1:621, f2:2212, dur:0.28}, word:'bed',   hl:'b<mark>e</mark>d',    zh:'短 e 音',  tip:'嘴巴半开，舌尖靠近下齿，发短促的"诶"' },
-    { ipa:'/æ/', phoneme:{t:'v', f1:860, f2:2112, dur:0.28}, word:'cat',   hl:'c<mark>a</mark>t',    zh:'短 a 音',  tip:'嘴巴大张，嘴型扁平，下巴用力往下，发"哎"' },
-    { ipa:'/ʌ/', phoneme:{t:'v', f1:764, f2:1511, dur:0.28}, word:'cup',   hl:'c<mark>u</mark>p',    zh:'短 uh 音', tip:'嘴微开，舌头放松居中，发一个轻松的"啊"' },
-    { ipa:'/ɒ/', phoneme:{t:'v', f1:600, f2: 900, dur:0.28}, word:'hot',   hl:'h<mark>o</mark>t',    zh:'短 o 音',  tip:'嘴巴圆形大张，像牙医说"啊——"时的嘴型' },
-    { ipa:'/ʊ/', phoneme:{t:'v', f1:459, f2:1105, dur:0.28}, word:'put',   hl:'p<mark>u</mark>t',    zh:'短 u 音',  tip:'嘴唇轻微收圆，不要太用力，快速发"乌"' },
-    { ipa:'/ə/', phoneme:{t:'v', f1:520, f2:1490, dur:0.25}, word:'sofa',  hl:'sof<mark>a</mark>',   zh:'弱化元音', tip:'最常见的英语音！嘴微张放松，发轻微的"呃"，不用力' },
+    { ipa:'/ɪ/', phoneme:{t:'v', f1:427, f2:2303, dur:0.28, wiki:'Near-close_near-front_unrounded_vowel.ogg'}, word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
+    { ipa:'/e/', phoneme:{t:'v', f1:621, f2:2212, dur:0.28, wiki:'Close-mid_front_unrounded_vowel.ogg'},        word:'bed',   hl:'b<mark>e</mark>d',    zh:'短 e 音',  tip:'嘴巴半开，舌尖靠近下齿，发短促的"诶"' },
+    { ipa:'/æ/', phoneme:{t:'v', f1:860, f2:2112, dur:0.28, wiki:'Near-open_front_unrounded_vowel.ogg'},        word:'cat',   hl:'c<mark>a</mark>t',    zh:'短 a 音',  tip:'嘴巴大张，嘴型扁平，下巴用力往下，发"哎"' },
+    { ipa:'/ʌ/', phoneme:{t:'v', f1:764, f2:1511, dur:0.28, wiki:'PR-open-mid_back_unrounded_vowel2.ogg'},      word:'cup',   hl:'c<mark>u</mark>p',    zh:'短 uh 音', tip:'嘴微开，舌头放松居中，发一个轻松的"啊"' },
+    { ipa:'/ɒ/', phoneme:{t:'v', f1:600, f2: 900, dur:0.28, wiki:'PR-open_back_rounded_vowel.ogg'},             word:'hot',   hl:'h<mark>o</mark>t',    zh:'短 o 音',  tip:'嘴巴圆形大张，像牙医说"啊——"时的嘴型' },
+    { ipa:'/ʊ/', phoneme:{t:'v', f1:459, f2:1105, dur:0.28, wiki:'Near-close_near-back_rounded_vowel.ogg'},     word:'put',   hl:'p<mark>u</mark>t',    zh:'短 u 音',  tip:'嘴唇轻微收圆，不要太用力，快速发"乌"' },
+    { ipa:'/ə/', phoneme:{t:'v', f1:520, f2:1490, dur:0.25, wiki:'Mid-central_vowel.ogg'},                      word:'sofa',  hl:'sof<mark>a</mark>',   zh:'弱化元音', tip:'最常见的英语音！嘴微张放松，发轻微的"呃"，不用力' },
   ],
   longVowels: [
-    { ipa:'/iː/', phoneme:{t:'v', f1:310, f2:2790, dur:0.50}, word:'see',  hl:'s<mark>ee</mark>',   zh:'长 i 音',  tip:'嘴角向两侧伸展，像微笑，然后拉长发"一——"' },
-    { ipa:'/ɜː/', phoneme:{t:'v', f1:520, f2:1580, dur:0.50}, word:'bird', hl:'b<mark>ir</mark>d',  zh:'长 er 音', tip:'嘴微张，舌头居中，拖长发"额——"，类似说"嗯？"' },
-    { ipa:'/ɑː/', phoneme:{t:'v', f1:850, f2:1600, dur:0.50}, word:'car',  hl:'c<mark>ar</mark>',   zh:'长 a 音',  tip:'嘴巴大张，喉咙放松，拖长发"啊——"' },
-    { ipa:'/ɔː/', phoneme:{t:'v', f1:590, f2: 940, dur:0.50}, word:'four', hl:'f<mark>our</mark>',  zh:'长 o 音',  tip:'嘴唇收圆，嘴微张，拖长发"哦——"' },
-    { ipa:'/uː/', phoneme:{t:'v', f1:370, f2: 950, dur:0.50}, word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
+    { ipa:'/iː/', phoneme:{t:'v', f1:310, f2:2790, dur:0.50, wiki:'Close_front_unrounded_vowel.ogg'},           word:'see',  hl:'s<mark>ee</mark>',   zh:'长 i 音',  tip:'嘴角向两侧伸展，像微笑，然后拉长发"一——"' },
+    { ipa:'/ɜː/', phoneme:{t:'v', f1:520, f2:1580, dur:0.50, wiki:'Open-mid_central_unrounded_vowel.ogg'},      word:'bird', hl:'b<mark>ir</mark>d',  zh:'长 er 音', tip:'嘴微张，舌头居中，拖长发"额——"，类似说"嗯？"' },
+    { ipa:'/ɑː/', phoneme:{t:'v', f1:850, f2:1600, dur:0.50, wiki:'Open_back_unrounded_vowel.ogg'},             word:'car',  hl:'c<mark>ar</mark>',   zh:'长 a 音',  tip:'嘴巴大张，喉咙放松，拖长发"啊——"' },
+    { ipa:'/ɔː/', phoneme:{t:'v', f1:590, f2: 940, dur:0.50, wiki:'PR-open-mid_back_rounded_vowel.ogg'},        word:'four', hl:'f<mark>our</mark>',  zh:'长 o 音',  tip:'嘴唇收圆，嘴微张，拖长发"哦——"' },
+    { ipa:'/uː/', phoneme:{t:'v', f1:370, f2: 950, dur:0.50, wiki:'Close_back_rounded_vowel.ogg'},              word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
   ],
   diphthongs: [
+    // Diphthongs: no standard IPA isolated recording, use formant synthesis
     { ipa:'/eɪ/', phoneme:{t:'d', f1s:621,f2s:2212, f1e:427,f2e:2303, dur:0.52}, word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
     { ipa:'/aɪ/', phoneme:{t:'d', f1s:850,f2s:1600, f1e:427,f2e:2303, dur:0.52}, word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
     { ipa:'/ɔɪ/', phoneme:{t:'d', f1s:590,f2s: 940, f1e:427,f2e:2303, dur:0.52}, word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
@@ -862,50 +863,50 @@ const DATA = {
     plosives: {
       label: '爆破音 · 气流在口腔积累，然后突然冲出',
       items: [
-        { ipa:'/p/', phoneme:{t:'s', text:'pa'}, word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
-        { ipa:'/b/', phoneme:{t:'s', text:'ba'}, word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
-        { ipa:'/t/', phoneme:{t:'s', text:'ta'}, word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
-        { ipa:'/d/', phoneme:{t:'s', text:'da'}, word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
-        { ipa:'/k/', phoneme:{t:'s', text:'ka'}, word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
-        { ipa:'/g/', phoneme:{t:'s', text:'ga'}, word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
+        { ipa:'/p/', phoneme:{t:'s', text:'pa', wiki:'Voiceless_bilabial_plosive.ogg'},         word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
+        { ipa:'/b/', phoneme:{t:'s', text:'ba', wiki:'Voiced_bilabial_plosive.ogg'},             word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
+        { ipa:'/t/', phoneme:{t:'s', text:'ta', wiki:'Voiceless_alveolar_plosive.ogg'},         word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
+        { ipa:'/d/', phoneme:{t:'s', text:'da', wiki:'Voiced_alveolar_plosive.ogg'},             word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
+        { ipa:'/k/', phoneme:{t:'s', text:'ka', wiki:'Voiceless_velar_plosive.ogg'},             word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
+        { ipa:'/g/', phoneme:{t:'s', text:'ga', wiki:'Voiced_velar_plosive_02.ogg'},             word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
       ]
     },
     fricatives: {
       label: '摩擦音 · 气流通过狭窄通道产生摩擦声',
       items: [
-        { ipa:'/f/', phoneme:{t:'s', text:'fff'},    word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
-        { ipa:'/v/', phoneme:{t:'s', text:'vvv'},    word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
-        { ipa:'/θ/', phoneme:{t:'s', text:'thin'},   word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
-        { ipa:'/ð/', phoneme:{t:'s', text:'the'},    word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
-        { ipa:'/s/', phoneme:{t:'s', text:'sss'},    word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
-        { ipa:'/z/', phoneme:{t:'s', text:'zzz'},    word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
-        { ipa:'/ʃ/', phoneme:{t:'s', text:'shh'},    word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
-        { ipa:'/ʒ/', phoneme:{t:'s', text:'genre'},  word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
-        { ipa:'/h/', phoneme:{t:'s', text:'ha'},     word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
+        { ipa:'/f/', phoneme:{t:'s', text:'fff',   wiki:'Voiceless_labio-dental_fricative.ogg'},  word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
+        { ipa:'/v/', phoneme:{t:'s', text:'vvv',   wiki:'Voiced_labio-dental_fricative.ogg'},    word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
+        { ipa:'/θ/', phoneme:{t:'s', text:'thin',  wiki:'Voiceless_dental_fricative.ogg'},        word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
+        { ipa:'/ð/', phoneme:{t:'s', text:'the',   wiki:'Voiced_dental_fricative.ogg'},           word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
+        { ipa:'/s/', phoneme:{t:'s', text:'sss',   wiki:'Voiceless_alveolar_sibilant.ogg'},       word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
+        { ipa:'/z/', phoneme:{t:'s', text:'zzz',   wiki:'Voiced_alveolar_sibilant.ogg'},          word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
+        { ipa:'/ʃ/', phoneme:{t:'s', text:'shh',   wiki:'Voiceless_palato-alveolar_sibilant.ogg'},word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
+        { ipa:'/ʒ/', phoneme:{t:'s', text:'genre', wiki:'Voiced_palato-alveolar_sibilant.ogg'},   word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
+        { ipa:'/h/', phoneme:{t:'s', text:'ha',    wiki:'Voiceless_glottal_fricative.ogg'},       word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
       ]
     },
     affricates: {
       label: '破擦音 · 爆破音 + 摩擦音的组合',
       items: [
-        { ipa:'/tʃ/', phoneme:{t:'s', text:'ch'},  word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
-        { ipa:'/dʒ/', phoneme:{t:'s', text:'ja'},  word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
+        { ipa:'/tʃ/', phoneme:{t:'s', text:'ch', wiki:'Voiceless_palato-alveolar_affricate.ogg'}, word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
+        { ipa:'/dʒ/', phoneme:{t:'s', text:'ja', wiki:'Voiced_palato-alveolar_affricate.ogg'},   word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
       ]
     },
     nasals: {
       label: '鼻音 · 气流从鼻腔通过产生共鸣',
       items: [
-        { ipa:'/m/', phoneme:{t:'s', text:'mmm'},  word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
-        { ipa:'/n/', phoneme:{t:'s', text:'nnn'},  word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
-        { ipa:'/ŋ/', phoneme:{t:'s', text:'ring'}, word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
+        { ipa:'/m/', phoneme:{t:'s', text:'mmm',  wiki:'Bilabial_nasal.ogg'},                    word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
+        { ipa:'/n/', phoneme:{t:'s', text:'nnn',  wiki:'Alveolar_nasal.ogg'},                    word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
+        { ipa:'/ŋ/', phoneme:{t:'s', text:'ring', wiki:'Velar_nasal.ogg'},                       word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
       ]
     },
     approximants: {
       label: '近音 · 发音器官接近但不完全阻塞，气流顺畅',
       items: [
-        { ipa:'/l/', phoneme:{t:'s', text:'la'},  word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
-        { ipa:'/r/', phoneme:{t:'s', text:'rrr'}, word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
-        { ipa:'/j/', phoneme:{t:'s', text:'ya'},  word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
-        { ipa:'/w/', phoneme:{t:'s', text:'wa'},  word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
+        { ipa:'/l/', phoneme:{t:'s', text:'la',  wiki:'Alveolar_lateral_approximant.ogg'},       word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
+        { ipa:'/r/', phoneme:{t:'s', text:'rrr', wiki:'Alveolar_approximant.ogg'},               word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
+        { ipa:'/j/', phoneme:{t:'s', text:'ya',  wiki:'Palatal_approximant.ogg'},                word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
+        { ipa:'/w/', phoneme:{t:'s', text:'wa',  wiki:'Voiced_labio-velar_approximant.ogg'},     word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
       ]
     }
   }
@@ -991,9 +992,11 @@ const synth = (() => {
 /* ═══════════════════════════════════════════════════════
    WEB SPEECH API  (used for consonants + example words)
 ═══════════════════════════════════════════════════════ */
+const WIKI_BASE = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
 let voices = [];
 let currentCard = null;
 let phonemeTimer = null;
+let currentAudio = null;
 
 function initVoices() {
   voices = window.speechSynthesis.getVoices();
@@ -1023,45 +1026,59 @@ function getBestFemaleVoice() {
 
 function clearCurrent() {
   if (phonemeTimer) { clearTimeout(phonemeTimer); phonemeTimer = null; }
+  if (currentAudio) { currentAudio.pause(); currentAudio.src = ''; currentAudio = null; }
   if (currentCard) {
     currentCard.classList.remove('playing-phoneme', 'playing-word');
     currentCard = null;
   }
 }
 
-// Play the phoneme sound: formant synth for vowels/diphthongs, TTS for consonants
+// Play the phoneme sound: Wikimedia real IPA audio → formant synth fallback for diphthongs
 function playPhoneme(ph, cardEl) {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   clearCurrent();
   const p = ph.phoneme;
 
-  if (p.t === 'v') {
-    synth.vowel(p.f1, p.f2, p.dur);
-  } else if (p.t === 'd') {
-    synth.diphthong(p.f1s, p.f2s, p.f1e, p.f2e, p.dur);
-  } else {
-    // consonant via TTS
-    if (!window.speechSynthesis) return;
-    const utt = new SpeechSynthesisUtterance(p.text);
-    utt.lang = 'en-US'; utt.rate = 0.62; utt.pitch = 1.08; utt.volume = 1.0;
-    const v = getBestFemaleVoice(); if (v) utt.voice = v;
-    utt.onstart = () => { cardEl.classList.add('playing-phoneme'); currentCard = cardEl; };
-    utt.onend = utt.onerror = () => {
+  if (p.wiki) {
+    const audio = new Audio(WIKI_BASE + encodeURIComponent(p.wiki));
+    currentAudio = audio;
+    cardEl.classList.add('playing-phoneme');
+    currentCard = cardEl;
+    const cleanup = () => {
       cardEl.classList.remove('playing-phoneme');
       if (currentCard === cardEl) currentCard = null;
+      if (currentAudio === audio) currentAudio = null;
     };
-    window.speechSynthesis.speak(utt);
+    audio.onended = cleanup;
+    audio.onerror = () => {
+      cleanup();
+      // fallback: formant synth for vowels, silent fail for consonants
+      if (p.t === 'v') {
+        synth.vowel(p.f1, p.f2, p.dur);
+        cardEl.classList.add('playing-phoneme');
+        currentCard = cardEl;
+        phonemeTimer = setTimeout(() => {
+          cardEl.classList.remove('playing-phoneme');
+          if (currentCard === cardEl) currentCard = null;
+          phonemeTimer = null;
+        }, (p.dur + 0.15) * 1000);
+      }
+    };
+    audio.play().catch(cleanup);
     return;
   }
 
-  // For synth sounds, drive the visual state via timer
-  cardEl.classList.add('playing-phoneme');
-  currentCard = cardEl;
-  phonemeTimer = setTimeout(() => {
-    cardEl.classList.remove('playing-phoneme');
-    if (currentCard === cardEl) currentCard = null;
-    phonemeTimer = null;
-  }, (p.dur + 0.15) * 1000);
+  // Diphthongs: formant synthesis (no wiki recording available)
+  if (p.t === 'd') {
+    synth.diphthong(p.f1s, p.f2s, p.f1e, p.f2e, p.dur);
+    cardEl.classList.add('playing-phoneme');
+    currentCard = cardEl;
+    phonemeTimer = setTimeout(() => {
+      cardEl.classList.remove('playing-phoneme');
+      if (currentCard === cardEl) currentCard = null;
+      phonemeTimer = null;
+    }, (p.dur + 0.15) * 1000);
+  }
 }
 
 // Play the example word via TTS
