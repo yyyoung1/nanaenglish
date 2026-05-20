@@ -779,7 +779,7 @@
         <button class="tab-btn active" data-tab="short-vowels">短元音 <small>(7)</small></button>
         <button class="tab-btn" data-tab="long-vowels">长元音 <small>(5)</small></button>
         <button class="tab-btn" data-tab="diphthongs">双元音 <small>(8)</small></button>
-        <button class="tab-btn" data-tab="consonants">辅音 <small>(24)</small></button>
+        <button class="tab-btn" data-tab="consonants">辅音 <small>(28)</small></button>
       </div>
 
       <!-- Short Vowels -->
@@ -827,10 +827,10 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   PHONEME DATA  (44 total)
+   PHONEME DATA  (48 total)
 ═══════════════════════════════════════════════════════ */
-// phoneme.t: 'v'=vowel, 'd'=diphthong word recording, 's'=short consonant teaching cue
-// phoneme.wiki: Wikimedia Commons filename → real human recording
+// phoneme.t only keeps the category. Actual IPA-button audio comes from local MP3 files
+// cut from the user's source video.
 const DATA = {
   shortVowels: [
     { ipa:'/ɪ/', phoneme:{t:'v', f1:427, f2:2303, dur:0.28, wiki:'Near-close_near-front_unrounded_vowel.ogg'}, word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
@@ -888,8 +888,12 @@ const DATA = {
     affricates: {
       label: '破擦音 · 爆破音 + 摩擦音的组合',
       items: [
+        { ipa:'/ts/', phoneme:{t:'s', cue:'ts'},   word:'cats',  hl:'ca<mark>ts</mark>',  zh:'清破擦音', tip:'/t/ + /s/ 的快速组合，常见于 cats、gets、sports 结尾' },
         { ipa:'/tʃ/', phoneme:{t:'s', cue:'chuh'}, word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
+        { ipa:'/tr/', phoneme:{t:'s', cue:'tree'}, word:'tree',  hl:'<mark>tr</mark>ee', zh:'清破擦音', tip:'/t/ 后快速接 /r/，tree/train/try 都是这个开头' },
+        { ipa:'/dz/', phoneme:{t:'s', cue:'dz'},   word:'beds',  hl:'be<mark>ds</mark>', zh:'浊破擦音', tip:'/d/ + /z/ 的快速组合，常见于 beds、cards、needs 结尾' },
         { ipa:'/dʒ/', phoneme:{t:'s', cue:'juh'},  word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
+        { ipa:'/dr/', phoneme:{t:'s', cue:'drink'},word:'drink', hl:'<mark>dr</mark>ink',zh:'浊破擦音', tip:'/d/ 后快速接 /r/，drink/dream/drive 都是这个开头' },
       ]
     },
     nasals: {
@@ -991,12 +995,58 @@ const synth = (() => {
 
 /* ═══════════════════════════════════════════════════════
    AUDIO PLAYBACK
-   - long vowels: Wikimedia IPA recordings
-   - short vowels: same recordings, hard-cut shorter
-   - diphthongs: Wikimedia word recordings with the target glide
-   - consonants: short female teaching cues
+   IPA-button audio is local MP3 cut from the provided 48-phoneme video.
 ═══════════════════════════════════════════════════════ */
-const WIKI_BASE = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
+const PHONEME_AUDIO = {
+  '/ɑː/': 'assets/audio/phonemes/aa-long.mp3',
+  '/ɔː/': 'assets/audio/phonemes/aw-long.mp3',
+  '/ɜː/': 'assets/audio/phonemes/er-long.mp3',
+  '/iː/': 'assets/audio/phonemes/ee-long.mp3',
+  '/uː/': 'assets/audio/phonemes/oo-long.mp3',
+  '/ʌ/': 'assets/audio/phonemes/uh-short.mp3',
+  '/ɒ/': 'assets/audio/phonemes/o-short.mp3',
+  '/ə/': 'assets/audio/phonemes/schwa.mp3',
+  '/ɪ/': 'assets/audio/phonemes/i-short.mp3',
+  '/ʊ/': 'assets/audio/phonemes/u-short.mp3',
+  '/e/': 'assets/audio/phonemes/e-short.mp3',
+  '/æ/': 'assets/audio/phonemes/ae-short.mp3',
+  '/eɪ/': 'assets/audio/phonemes/ei.mp3',
+  '/aɪ/': 'assets/audio/phonemes/ai.mp3',
+  '/ɔɪ/': 'assets/audio/phonemes/oi.mp3',
+  '/ɪə/': 'assets/audio/phonemes/ie.mp3',
+  '/eə/': 'assets/audio/phonemes/ea.mp3',
+  '/ʊə/': 'assets/audio/phonemes/ua.mp3',
+  '/əʊ/': 'assets/audio/phonemes/ou.mp3',
+  '/aʊ/': 'assets/audio/phonemes/au.mp3',
+  '/p/': 'assets/audio/phonemes/p.mp3',
+  '/t/': 'assets/audio/phonemes/t.mp3',
+  '/k/': 'assets/audio/phonemes/k.mp3',
+  '/f/': 'assets/audio/phonemes/f.mp3',
+  '/θ/': 'assets/audio/phonemes/th-voiceless.mp3',
+  '/s/': 'assets/audio/phonemes/s.mp3',
+  '/b/': 'assets/audio/phonemes/b.mp3',
+  '/d/': 'assets/audio/phonemes/d.mp3',
+  '/g/': 'assets/audio/phonemes/g.mp3',
+  '/v/': 'assets/audio/phonemes/v.mp3',
+  '/ð/': 'assets/audio/phonemes/th-voiced.mp3',
+  '/z/': 'assets/audio/phonemes/z.mp3',
+  '/ʃ/': 'assets/audio/phonemes/sh.mp3',
+  '/h/': 'assets/audio/phonemes/h.mp3',
+  '/ts/': 'assets/audio/phonemes/ts.mp3',
+  '/tʃ/': 'assets/audio/phonemes/ch.mp3',
+  '/tr/': 'assets/audio/phonemes/tr.mp3',
+  '/ʒ/': 'assets/audio/phonemes/zh.mp3',
+  '/r/': 'assets/audio/phonemes/r.mp3',
+  '/dz/': 'assets/audio/phonemes/dz.mp3',
+  '/dʒ/': 'assets/audio/phonemes/j.mp3',
+  '/dr/': 'assets/audio/phonemes/dr.mp3',
+  '/m/': 'assets/audio/phonemes/m.mp3',
+  '/n/': 'assets/audio/phonemes/n.mp3',
+  '/ŋ/': 'assets/audio/phonemes/ng.mp3',
+  '/w/': 'assets/audio/phonemes/w.mp3',
+  '/j/': 'assets/audio/phonemes/y.mp3',
+  '/l/': 'assets/audio/phonemes/l.mp3',
+};
 let voices = [];
 let currentCard = null;
 let phonemeTimer = null;
@@ -1037,9 +1087,8 @@ function clearCurrent() {
   }
 }
 
-// Play Wikimedia audio. shortCutMs: pause after N ms when the recording is too long.
-function playWikiAudio(wiki, cardEl, shortCutMs, fallback) {
-  const audio = new Audio(WIKI_BASE + encodeURIComponent(wiki));
+function playAudioFile(src, cardEl, fallback) {
+  const audio = new Audio(src);
   currentAudio = audio;
   cardEl.classList.add('playing-phoneme');
   currentCard = cardEl;
@@ -1061,9 +1110,6 @@ function playWikiAudio(wiki, cardEl, shortCutMs, fallback) {
     if (fallback) fallback();
   });
 
-  if (shortCutMs) {
-    phonemeTimer = setTimeout(() => { audio.pause(); cleanup(); }, shortCutMs);
-  }
 }
 
 function playTeachingCue(text, cardEl, opts = {}) {
@@ -1097,17 +1143,10 @@ function playPhoneme(ph, cardEl) {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   clearCurrent();
   const p = ph.phoneme;
+  const src = PHONEME_AUDIO[ph.ipa];
 
-  if (p.t === 'v' && p.wiki) {
-    // Short vowels must stay short. Long vowels are intentionally unchanged.
-    const cut = (p.dur && p.dur <= 0.3) ? 230 : null;
-    playWikiAudio(p.wiki, cardEl, cut);
-    return;
-  }
-
-  if (p.t === 'd' && p.wiki) {
-    // Real word recordings are more natural than generated glide sounds.
-    playWikiAudio(p.wiki, cardEl, 900, () => playTeachingCue(p.cue, cardEl, { rate: 0.76 }));
+  if (src) {
+    playAudioFile(src, cardEl, () => playTeachingCue(p.cue || ph.word, cardEl, { rate: 0.82, cutMs: 650 }));
     return;
   }
 
