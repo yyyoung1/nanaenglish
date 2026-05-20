@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>英语启航 · 你的专属英语小屋</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────
+       RESET & TOKENS
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:               #FFF8EF;
+      --bg-dot:           rgba(196,98,31,0.07);
+
+      --sidebar-bg:       #150E08;
+      --sidebar-border:   rgba(255,248,239,0.07);
+      --sidebar-muted:    rgba(255,248,239,0.45);
+      --sidebar-text:     rgba(255,248,239,0.75);
+      --sidebar-active:   #FFF8EF;
+      --sidebar-accent:   #C4621F;
+      --sidebar-hover:    rgba(196,98,31,0.14);
+      --sidebar-w:        258px;
+
+      --card-bg:          #FFFFFF;
+      --card-border:      #EDE0D0;
+      --card-shadow:      0 2px 10px rgba(21,14,8,0.06);
+      --card-shadow-hover:0 10px 36px rgba(196,98,31,0.14);
+
+      --text-primary:     #1A0F07;
+      --text-secondary:   #7A5840;
+      --text-muted:       #B09070;
+
+      --accent:           #C4621F;
+      --accent-light:     #FDF1E6;
+      --accent-dark:      #A54F16;
+
+      --vowel:            #1E8070;
+      --vowel-bg:         #EAF5F3;
+      --consonant:        #6045A8;
+      --consonant-bg:     #F0ECF8;
+
+      --radius-sm:        8px;
+      --radius-md:        16px;
+      --radius-lg:        24px;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Quicksand', 'Noto Sans SC', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+    }
+
+    /* polka-dot background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(var(--bg-dot) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       LAYOUT
+    ───────────────────────────────────────────── */
+    #app {
+      display: flex;
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─────────────────────────────────────────────
+       SIDEBAR
+    ───────────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 0 24px;
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* subtle grain texture on sidebar */
+    .sidebar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .sidebar-brand {
+      padding: 0 22px 26px;
+      border-bottom: 1px solid var(--sidebar-border);
+    }
+
+    .sidebar-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .sidebar-logo {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent), #E8894A);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(196,98,31,0.35);
+    }
+
+    .sidebar-title-block {}
+    .sidebar-name {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sidebar-active);
+      line-height: 1.2;
+    }
+    .sidebar-tagline {
+      font-size: 10.5px;
+      color: var(--sidebar-muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 18px 10px;
+    }
+
+    .nav-group-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sidebar-muted);
+      padding: 14px 12px 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--sidebar-text);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Quicksand', 'Noto Sans SC', sans-serif;
+    }
+    .nav-item:hover:not(.disabled) {
+      background: var(--sidebar-hover);
+      color: var(--sidebar-active);
+    }
+    .nav-item.active {
+      background: var(--sidebar-accent);
+      color: #fff;
+    }
+    .nav-item.disabled {
+      opacity: 0.38;
+      cursor: default;
+    }
+
+    .nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+
+    .nav-badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.65);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+    .nav-item.active .nav-badge { background: rgba(255,255,255,0.25); color: #fff; }
+
+    .sidebar-footer {
+      padding: 18px 22px 0;
+      border-top: 1px solid var(--sidebar-border);
+      font-size: 11.5px;
+      color: var(--sidebar-muted);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────────────────────
+       MAIN
+    ───────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* MOBILE HEADER */
+    .mobile-header {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: rgba(255,248,239,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .menu-toggle {
+      background: none;
+      border: 1.5px solid var(--card-border);
+      border-radius: 8px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 17px;
+      color: var(--text-primary);
+      transition: all 0.15s ease;
+    }
+    .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .mobile-site-name {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* PAGES */
+    .page { display: none; flex: 1; padding: 44px 44px 80px; }
+    .page.active { display: block; }
+
+    /* ─────────────────────────────────────────────
+       HOME PAGE
+    ───────────────────────────────────────────── */
+    .home-greeting { margin-bottom: 38px; }
+    .home-greeting h1 {
+      font-family: 'Lora', serif;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .home-greeting p { font-size: 15px; color: var(--text-secondary); font-weight: 500; }
+
+    .home-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+      margin-bottom: 44px;
+    }
+
+    .home-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.24s ease;
+      box-shadow: var(--card-shadow);
+    }
+    .home-card:not(.locked):hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: rgba(196,98,31,0.3);
+    }
+    .home-card.locked { opacity: 0.55; cursor: default; }
+
+    .home-card-icon { font-size: 38px; margin-bottom: 16px; }
+    .home-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .home-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 22px;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .home-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.18s ease;
+    }
+    .home-card-btn:hover { background: var(--accent-dark); transform: translateX(2px); }
+
+    .coming-soon-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.05);
+      padding: 2px 8px;
+      border-radius: 20px;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+
+    .home-stats {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+      flex: 1;
+      min-width: 110px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+    .stat-num {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      font-weight: 600;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    /* ─────────────────────────────────────────────
+       PHONETICS PAGE
+    ───────────────────────────────────────────── */
+    .page-header { margin-bottom: 30px; }
+    .page-header h1 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.7;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      font-family: 'Quicksand', 'Noto Sans SC', sans-serif;
+    }
+    .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* TAB PANELS */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      margin-top: 4px;
+    }
+    .section-divider-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .section-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    /* PHONEME GRID */
+    .phoneme-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    /* PHONEME CARD */
+    .phoneme-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 22px 14px 18px;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* colored top stripe */
+    .phoneme-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      transition: height 0.2s ease;
+    }
+    .phoneme-card.vowel::before { background: linear-gradient(90deg, var(--vowel), #38AFA0); }
+    .phoneme-card.consonant::before { background: linear-gradient(90deg, var(--consonant), #8B6DD4); }
+
+    .phoneme-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); }
+    .phoneme-card:hover::before { height: 5px; }
+    .phoneme-card:active { transform: translateY(-1px); }
+
+    .phoneme-card.playing {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196,98,31,0.18), var(--card-shadow-hover);
+    }
+
+    /* ripple */
+    .phoneme-card .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(196,98,31,0.18);
+      transform: scale(0);
+      animation: rippleAnim 0.55s linear forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .card-ipa {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 11px;
+      line-height: 1;
+    }
+
+    .card-word {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      letter-spacing: 0.01em;
+    }
+    .card-word mark {
+      background: none;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .card-chinese {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 14px;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    /* SOUND WAVE */
+    .sound-wave {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      height: 18px;
+      margin-bottom: 8px;
+    }
+    .sound-wave span {
+      display: inline-block;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      opacity: 0.3;
+      transition: opacity 0.2s ease;
+    }
+    .sound-wave span:nth-child(1) { height: 7px;  animation-delay: 0.00s; }
+    .sound-wave span:nth-child(2) { height: 13px; animation-delay: 0.12s; }
+    .sound-wave span:nth-child(3) { height: 18px; animation-delay: 0.06s; }
+    .sound-wave span:nth-child(4) { height: 11px; animation-delay: 0.18s; }
+    .sound-wave span:nth-child(5) { height: 6px;  animation-delay: 0.09s; }
+
+    .phoneme-card.playing .sound-wave span {
+      opacity: 1;
+      animation: barDance 0.7s ease-in-out infinite;
+    }
+    @keyframes barDance {
+      0%, 100% { transform: scaleY(0.35); }
+      50%       { transform: scaleY(1); }
+    }
+
+    .card-hint {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .phoneme-card.playing .card-hint { color: var(--accent); }
+
+    /* category background tint on hover */
+    .phoneme-card.vowel:hover    { background: var(--vowel-bg); }
+    .phoneme-card.consonant:hover{ background: var(--consonant-bg); }
+
+    /* ANIMATION: staggered card entrance */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .phoneme-card {
+      animation: fadeSlideUp 0.38s ease both;
+    }
+
+    /* ─────────────────────────────────────────────
+       TIP BAR (bottom fixed bar showing pronunciation tips)
+    ───────────────────────────────────────────── */
+    #tipBar {
+      position: fixed;
+      bottom: 0;
+      left: var(--sidebar-w);
+      right: 0;
+      padding: 11px 28px;
+      background: rgba(255,248,239,0.94);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--card-border);
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 400;
+      transform: translateY(100%);
+      transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #tipBar.visible { transform: translateY(0); }
+    #tipBar .tip-icon { font-size: 15px; flex-shrink: 0; }
+
+    /* ─────────────────────────────────────────────
+       SIDEBAR OVERLAY (mobile)
+    ───────────────────────────────────────────── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.42);
+      backdrop-filter: blur(2px);
+      z-index: 90;
+    }
+    .sidebar-overlay.visible { display: block; }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .phoneme-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 820px) {
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        transform: translateX(-100%);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .mobile-header { display: flex; }
+      .page { padding: 24px 20px 80px; }
+      .phoneme-grid { grid-template-columns: repeat(2, 1fr); }
+      #tipBar { left: 0; }
+      .home-stats { gap: 10px; }
+    }
+    @media (max-width: 460px) {
+      .phoneme-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .card-ipa { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo-wrap">
+        <div class="sidebar-logo">✦</div>
+        <div class="sidebar-title-block">
+          <div class="sidebar-name">英语启航</div>
+          <div class="sidebar-tagline">你的专属英语小屋</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">导航</div>
+      <button class="nav-item active" data-page="home">
+        <span class="nav-icon">🏠</span> 首页
+      </button>
+
+      <div class="nav-group-label">学习模块</div>
+      <button class="nav-item" data-page="phonetics">
+        <span class="nav-icon">🔤</span> 音标入门
+        <span class="nav-badge">44个</span>
+      </button>
+      <button class="nav-item disabled">
+        <span class="nav-icon">📖</span> 基础词汇
+        <span class="nav-badge">即将</span>
+      </button>
+      <button class="nav-item disabled">
+        <span class="nav-icon">💬</span> 日常对话
+        <span class="nav-badge">即将</span>
+      </button>
+      <button class="nav-item disabled">
+        <span class="nav-icon">🎧</span> 听力练习
+        <span class="nav-badge">即将</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      专为你打造 ♡<br />
+      <span style="font-size:10px;margin-top:4px;display:block;">从今天开始，一起学英语</span>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main" id="mainContent">
+
+    <!-- Mobile top bar -->
+    <header class="mobile-header">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <span class="mobile-site-name">英语启航</span>
+    </header>
+
+    <!-- ── HOME PAGE ── -->
+    <section class="page active" id="page-home">
+      <div class="home-greeting">
+        <h1>欢迎回来 👋</h1>
+        <p>选一个模块，开始今天的英语之旅吧～</p>
+      </div>
+
+      <div class="home-cards">
+        <div class="home-card" onclick="navigateTo('phonetics')">
+          <div class="home-card-icon">🔤</div>
+          <h2>音标入门</h2>
+          <p>学英语的第一步！先搞定 44 个音标，打好发音基础。以后看到任何单词，都能自己拼读出来！</p>
+          <button class="home-card-btn">开始学习 →</button>
+        </div>
+        <div class="home-card locked">
+          <div class="home-card-icon">📖</div>
+          <h2>基础词汇 <span class="coming-soon-tag">即将推出</span></h2>
+          <p>从最常用的 300 个英语单词开始，配合音标，边学边记，打造你的第一个单词库。</p>
+        </div>
+        <div class="home-card locked">
+          <div class="home-card-icon">💬</div>
+          <h2>日常对话 <span class="coming-soon-tag">即将推出</span></h2>
+          <p>购物、问路、打招呼……学会最实用的英语日常表达，出门旅游、看剧都用得上！</p>
+        </div>
+      </div>
+
+      <div class="home-stats">
+        <div class="stat-card">
+          <div class="stat-num">44</div>
+          <div class="stat-label">个英语音标</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">20</div>
+          <div class="stat-label">个元音音标</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">24</div>
+          <div class="stat-label">个辅音音标</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">种可能</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PHONETICS PAGE ── -->
+    <section class="page" id="page-phonetics">
+      <div class="page-header">
+        <h1>🔤 音标入门</h1>
+        <p>英语共有 <strong>44 个音标</strong>，分为元音（20个）和辅音（24个）。<br/>
+           点击任意卡片，即可听到例词的发音。鼠标悬停可看发音小技巧！</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="short-vowels">短元音 <small>(7)</small></button>
+        <button class="tab-btn" data-tab="long-vowels">长元音 <small>(5)</small></button>
+        <button class="tab-btn" data-tab="diphthongs">双元音 <small>(8)</small></button>
+        <button class="tab-btn" data-tab="consonants">辅音 <small>(24)</small></button>
+      </div>
+
+      <!-- Short Vowels -->
+      <div class="tab-panel active" id="tab-short-vowels">
+        <div class="section-divider">
+          <span class="section-divider-label">短元音 · 发音短促，一闪而过</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="phoneme-grid" id="grid-short-vowels"></div>
+      </div>
+
+      <!-- Long Vowels -->
+      <div class="tab-panel" id="tab-long-vowels">
+        <div class="section-divider">
+          <span class="section-divider-label">长元音 · 拉长发音，持续振动</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="phoneme-grid" id="grid-long-vowels"></div>
+      </div>
+
+      <!-- Diphthongs -->
+      <div class="tab-panel" id="tab-diphthongs">
+        <div class="section-divider">
+          <span class="section-divider-label">双元音 · 从一个元音平滑滑向另一个</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="phoneme-grid" id="grid-diphthongs"></div>
+      </div>
+
+      <!-- Consonants -->
+      <div class="tab-panel" id="tab-consonants">
+        <div id="consonants-container"></div>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- Tip bar -->
+  <div id="tipBar">
+    <span class="tip-icon">💡</span>
+    <span id="tipText"></span>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   PHONEME DATA  (44 total)
+═══════════════════════════════════════════════════════ */
+const DATA = {
+  shortVowels: [
+    { ipa:'/ɪ/', word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
+    { ipa:'/e/', word:'bed',   hl:'b<mark>e</mark>d',    zh:'短 e 音',  tip:'嘴巴半开，舌尖靠近下齿，发短促的"诶"' },
+    { ipa:'/æ/', word:'cat',   hl:'c<mark>a</mark>t',    zh:'短 a 音',  tip:'嘴巴大张，嘴型扁平，下巴用力往下，发"哎"' },
+    { ipa:'/ʌ/', word:'cup',   hl:'c<mark>u</mark>p',    zh:'短 uh 音', tip:'嘴微开，舌头放松居中，发一个轻松的"啊"' },
+    { ipa:'/ɒ/', word:'hot',   hl:'h<mark>o</mark>t',    zh:'短 o 音',  tip:'嘴巴圆形大张，像牙医说"啊——"时的嘴型' },
+    { ipa:'/ʊ/', word:'put',   hl:'p<mark>u</mark>t',    zh:'短 u 音',  tip:'嘴唇轻微收圆，不要太用力，快速发"乌"' },
+    { ipa:'/ə/', word:'sofa',  hl:'sof<mark>a</mark>',   zh:'弱化元音', tip:'最常见的英语音！嘴微张放松，发轻微的"呃"，不用力' },
+  ],
+  longVowels: [
+    { ipa:'/iː/', word:'see',  hl:'s<mark>ee</mark>',   zh:'长 i 音',  tip:'嘴角向两侧伸展，像微笑，然后拉长发"一——"' },
+    { ipa:'/ɜː/', word:'bird', hl:'b<mark>ir</mark>d',  zh:'长 er 音', tip:'嘴微张，舌头居中，拖长发"额——"，类似说"嗯？"' },
+    { ipa:'/ɑː/', word:'car',  hl:'c<mark>ar</mark>',   zh:'长 a 音',  tip:'嘴巴大张，喉咙放松，拖长发"啊——"' },
+    { ipa:'/ɔː/', word:'four', hl:'f<mark>our</mark>',  zh:'长 o 音',  tip:'嘴唇收圆，嘴微张，拖长发"哦——"' },
+    { ipa:'/uː/', word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
+  ],
+  diphthongs: [
+    { ipa:'/eɪ/', word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
+    { ipa:'/aɪ/', word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
+    { ipa:'/ɔɪ/', word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
+    { ipa:'/əʊ/', word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
+    { ipa:'/aʊ/', word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
+    { ipa:'/ɪə/', word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
+    { ipa:'/eə/', word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
+    { ipa:'/ʊə/', word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
+  ],
+  consonants: {
+    plosives: {
+      label: '爆破音 · 气流在口腔积累，然后突然冲出',
+      items: [
+        { ipa:'/p/', word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
+        { ipa:'/b/', word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
+        { ipa:'/t/', word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
+        { ipa:'/d/', word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
+        { ipa:'/k/', word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
+        { ipa:'/g/', word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
+      ]
+    },
+    fricatives: {
+      label: '摩擦音 · 气流通过狭窄通道产生摩擦声',
+      items: [
+        { ipa:'/f/', word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
+        { ipa:'/v/', word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
+        { ipa:'/θ/', word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
+        { ipa:'/ð/', word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
+        { ipa:'/s/', word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
+        { ipa:'/z/', word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
+        { ipa:'/ʃ/', word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
+        { ipa:'/ʒ/', word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
+        { ipa:'/h/', word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
+      ]
+    },
+    affricates: {
+      label: '破擦音 · 爆破音 + 摩擦音的组合',
+      items: [
+        { ipa:'/tʃ/', word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
+        { ipa:'/dʒ/', word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
+      ]
+    },
+    nasals: {
+      label: '鼻音 · 气流从鼻腔通过产生共鸣',
+      items: [
+        { ipa:'/m/', word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
+        { ipa:'/n/', word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
+        { ipa:'/ŋ/', word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
+      ]
+    },
+    approximants: {
+      label: '近音 · 发音器官接近但不完全阻塞，气流顺畅',
+      items: [
+        { ipa:'/l/', word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
+        { ipa:'/r/', word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
+        { ipa:'/j/', word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
+        { ipa:'/w/', word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
+      ]
+    }
+  }
+};
+
+/* ═══════════════════════════════════════════════════════
+   WEB SPEECH API
+═══════════════════════════════════════════════════════ */
+let voices = [];
+let currentCard = null;
+
+function initVoices() {
+  voices = window.speechSynthesis.getVoices();
+  if (!voices.length) {
+    window.speechSynthesis.addEventListener('voiceschanged', () => {
+      voices = window.speechSynthesis.getVoices();
+    });
+  }
+}
+
+function getBestVoice() {
+  // Prefer local/native English voices
+  const pref = voices.find(v =>
+    (v.lang === 'en-US' || v.lang === 'en-GB') && v.localService
+  );
+  if (pref) return pref;
+  return voices.find(v => v.lang.startsWith('en')) || null;
+}
+
+function speak(word, cardEl) {
+  if (!window.speechSynthesis) {
+    alert('您的浏览器暂不支持朗读功能，推荐使用 Chrome 浏览器～');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  if (currentCard) currentCard.classList.remove('playing');
+
+  const utt = new SpeechSynthesisUtterance(word);
+  utt.lang = 'en-US';
+  utt.rate = 0.78;
+  utt.pitch = 1.0;
+  utt.volume = 1.0;
+  const v = getBestVoice();
+  if (v) utt.voice = v;
+
+  utt.onstart = () => { cardEl.classList.add('playing'); currentCard = cardEl; };
+  utt.onend   = () => { cardEl.classList.remove('playing'); currentCard = null; };
+  utt.onerror = () => { cardEl.classList.remove('playing'); currentCard = null; };
+
+  window.speechSynthesis.speak(utt);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUILD CARD
+═══════════════════════════════════════════════════════ */
+const tipBar  = document.getElementById('tipBar');
+const tipText = document.getElementById('tipText');
+
+function buildCard(ph, type, delayMs) {
+  const card = document.createElement('div');
+  card.className = `phoneme-card ${type}`;
+  card.style.animationDelay = `${delayMs}ms`;
+
+  card.innerHTML = `
+    <div class="card-ipa">${ph.ipa}</div>
+    <div class="card-word">${ph.hl}</div>
+    <div class="card-chinese">${ph.zh}</div>
+    <div class="sound-wave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="card-hint">🔊 点击发音</div>
+  `;
+
+  // Ripple on click
+  card.addEventListener('click', e => {
+    const rect = card.getBoundingClientRect();
+    const rip  = document.createElement('span');
+    rip.className = 'ripple';
+    const sz = Math.max(rect.width, rect.height);
+    rip.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;
+    card.appendChild(rip);
+    setTimeout(() => rip.remove(), 600);
+    speak(ph.word, card);
+  });
+
+  // Tip bar on hover
+  card.addEventListener('mouseenter', () => {
+    tipText.textContent = ph.tip;
+    tipBar.classList.add('visible');
+  });
+  card.addEventListener('mouseleave', () => tipBar.classList.remove('visible'));
+
+  return card;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════════════ */
+function renderAll() {
+  // Short vowels
+  const svG = document.getElementById('grid-short-vowels');
+  DATA.shortVowels.forEach((p, i) => svG.appendChild(buildCard(p, 'vowel', i * 55)));
+
+  // Long vowels
+  const lvG = document.getElementById('grid-long-vowels');
+  DATA.longVowels.forEach((p, i) => lvG.appendChild(buildCard(p, 'vowel', i * 55)));
+
+  // Diphthongs
+  const dtG = document.getElementById('grid-diphthongs');
+  DATA.diphthongs.forEach((p, i) => dtG.appendChild(buildCard(p, 'vowel', i * 45)));
+
+  // Consonants (grouped)
+  const cc = document.getElementById('consonants-container');
+  Object.values(DATA.consonants).forEach((group, gi) => {
+    const div = document.createElement('div');
+    div.className = 'section-divider';
+    div.innerHTML = `<span class="section-divider-label">${group.label}</span><div class="section-divider-line"></div>`;
+    cc.appendChild(div);
+
+    const grid = document.createElement('div');
+    grid.className = 'phoneme-grid';
+    group.items.forEach((p, i) => {
+      grid.appendChild(buildCard(p, 'consonant', gi * 80 + i * 38));
+    });
+    cc.appendChild(grid);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════ */
+function navigateTo(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const tgt = document.getElementById(`page-${pageId}`);
+  if (tgt) tgt.classList.add('active');
+
+  document.querySelectorAll('.nav-item[data-page]').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === pageId);
+  });
+
+  document.getElementById('mainContent').scrollTop = 0;
+  closeSidebar();
+}
+
+function initTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    });
+  });
+}
+
+function initNav() {
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+    item.addEventListener('click', () => navigateTo(item.dataset.page));
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE SIDEBAR
+═══════════════════════════════════════════════════════ */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+
+function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('visible'); }
+function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('visible'); }
+
+function initMobile() {
+  document.getElementById('menuToggle').addEventListener('click', openSidebar);
+  overlay.addEventListener('click', closeSidebar);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  initVoices();
+  renderAll();
+  initTabs();
+  initNav();
+  initMobile();
+});
+</script>
+</body>
+</html>
