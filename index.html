@@ -806,79 +806,79 @@
 ═══════════════════════════════════════════════════════ */
 const DATA = {
   shortVowels: [
-    { ipa:'/ɪ/', word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
-    { ipa:'/e/', word:'bed',   hl:'b<mark>e</mark>d',    zh:'短 e 音',  tip:'嘴巴半开，舌尖靠近下齿，发短促的"诶"' },
-    { ipa:'/æ/', word:'cat',   hl:'c<mark>a</mark>t',    zh:'短 a 音',  tip:'嘴巴大张，嘴型扁平，下巴用力往下，发"哎"' },
-    { ipa:'/ʌ/', word:'cup',   hl:'c<mark>u</mark>p',    zh:'短 uh 音', tip:'嘴微开，舌头放松居中，发一个轻松的"啊"' },
-    { ipa:'/ɒ/', word:'hot',   hl:'h<mark>o</mark>t',    zh:'短 o 音',  tip:'嘴巴圆形大张，像牙医说"啊——"时的嘴型' },
-    { ipa:'/ʊ/', word:'put',   hl:'p<mark>u</mark>t',    zh:'短 u 音',  tip:'嘴唇轻微收圆，不要太用力，快速发"乌"' },
-    { ipa:'/ə/', word:'sofa',  hl:'sof<mark>a</mark>',   zh:'弱化元音', tip:'最常见的英语音！嘴微张放松，发轻微的"呃"，不用力' },
+    { ipa:'/ɪ/', phonemeText:'ih',   word:'bit',   hl:'b<mark>i</mark>t',    zh:'短 i 音',  tip:'嘴角微微向两侧张开，快速发一个轻短的"一"' },
+    { ipa:'/e/', phonemeText:'eh',   word:'bed',   hl:'b<mark>e</mark>d',    zh:'短 e 音',  tip:'嘴巴半开，舌尖靠近下齿，发短促的"诶"' },
+    { ipa:'/æ/', phonemeText:'aah',  word:'cat',   hl:'c<mark>a</mark>t',    zh:'短 a 音',  tip:'嘴巴大张，嘴型扁平，下巴用力往下，发"哎"' },
+    { ipa:'/ʌ/', phonemeText:'uh',   word:'cup',   hl:'c<mark>u</mark>p',    zh:'短 uh 音', tip:'嘴微开，舌头放松居中，发一个轻松的"啊"' },
+    { ipa:'/ɒ/', phonemeText:'ah',   word:'hot',   hl:'h<mark>o</mark>t',    zh:'短 o 音',  tip:'嘴巴圆形大张，像牙医说"啊——"时的嘴型' },
+    { ipa:'/ʊ/', phonemeText:'oo',   word:'put',   hl:'p<mark>u</mark>t',    zh:'短 u 音',  tip:'嘴唇轻微收圆，不要太用力，快速发"乌"' },
+    { ipa:'/ə/', phonemeText:'uh',   word:'sofa',  hl:'sof<mark>a</mark>',   zh:'弱化元音', tip:'最常见的英语音！嘴微张放松，发轻微的"呃"，不用力' },
   ],
   longVowels: [
-    { ipa:'/iː/', word:'see',  hl:'s<mark>ee</mark>',   zh:'长 i 音',  tip:'嘴角向两侧伸展，像微笑，然后拉长发"一——"' },
-    { ipa:'/ɜː/', word:'bird', hl:'b<mark>ir</mark>d',  zh:'长 er 音', tip:'嘴微张，舌头居中，拖长发"额——"，类似说"嗯？"' },
-    { ipa:'/ɑː/', word:'car',  hl:'c<mark>ar</mark>',   zh:'长 a 音',  tip:'嘴巴大张，喉咙放松，拖长发"啊——"' },
-    { ipa:'/ɔː/', word:'four', hl:'f<mark>our</mark>',  zh:'长 o 音',  tip:'嘴唇收圆，嘴微张，拖长发"哦——"' },
-    { ipa:'/uː/', word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
+    { ipa:'/iː/', phonemeText:'eee',  word:'see',  hl:'s<mark>ee</mark>',   zh:'长 i 音',  tip:'嘴角向两侧伸展，像微笑，然后拉长发"一——"' },
+    { ipa:'/ɜː/', phonemeText:'errr', word:'bird', hl:'b<mark>ir</mark>d',  zh:'长 er 音', tip:'嘴微张，舌头居中，拖长发"额——"，类似说"嗯？"' },
+    { ipa:'/ɑː/', phonemeText:'ahhh', word:'car',  hl:'c<mark>ar</mark>',   zh:'长 a 音',  tip:'嘴巴大张，喉咙放松，拖长发"啊——"' },
+    { ipa:'/ɔː/', phonemeText:'awww', word:'four', hl:'f<mark>our</mark>',  zh:'长 o 音',  tip:'嘴唇收圆，嘴微张，拖长发"哦——"' },
+    { ipa:'/uː/', phonemeText:'oooo', word:'too',  hl:'t<mark>oo</mark>',   zh:'长 u 音',  tip:'嘴唇收圆向前突出，拖长发"乌——"，嘴型要圆' },
   ],
   diphthongs: [
-    { ipa:'/eɪ/', word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
-    { ipa:'/aɪ/', word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
-    { ipa:'/ɔɪ/', word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
-    { ipa:'/əʊ/', word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
-    { ipa:'/aʊ/', word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
-    { ipa:'/ɪə/', word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
-    { ipa:'/eə/', word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
-    { ipa:'/ʊə/', word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
+    { ipa:'/eɪ/', phonemeText:'ay',  word:'day',   hl:'d<mark>ay</mark>',   zh:'e → i 滑', tip:'从短e音滑向短i音，像中文"嗳"，name/face/rain都是这个音' },
+    { ipa:'/aɪ/', phonemeText:'eye', word:'my',    hl:'m<mark>y</mark>',    zh:'a → i 滑', tip:'从短a音滑向短i音，像中文"爱"，I/like/time都是这个音' },
+    { ipa:'/ɔɪ/', phonemeText:'oy',  word:'boy',   hl:'b<mark>oy</mark>',   zh:'o → i 滑', tip:'从长o音滑向短i音，像"欧依"，boy/oil/coin' },
+    { ipa:'/əʊ/', phonemeText:'oh',  word:'go',    hl:'g<mark>o</mark>',    zh:'ə → u 滑', tip:'从弱元音滑向短u音，像"欧"，go/home/no' },
+    { ipa:'/aʊ/', phonemeText:'ow',  word:'now',   hl:'n<mark>ow</mark>',   zh:'a → u 滑', tip:'从短a音滑向短u音，像"奥"，now/out/house' },
+    { ipa:'/ɪə/', phonemeText:'ear', word:'here',  hl:'h<mark>ere</mark>',  zh:'i → ə 滑', tip:'从短i音滑向弱元音，像"伊额"，here/ear/idea' },
+    { ipa:'/eə/', phonemeText:'air', word:'there', hl:'th<mark>ere</mark>', zh:'e → ə 滑', tip:'从短e音滑向弱元音，像"嗳额"，there/air/care' },
+    { ipa:'/ʊə/', phonemeText:'ure', word:'pure',  hl:'p<mark>ure</mark>',  zh:'u → ə 滑', tip:'从短u音滑向弱元音，像"犹额"，pure/tour/cure' },
   ],
   consonants: {
     plosives: {
       label: '爆破音 · 气流在口腔积累，然后突然冲出',
       items: [
-        { ipa:'/p/', word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
-        { ipa:'/b/', word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
-        { ipa:'/t/', word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
-        { ipa:'/d/', word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
-        { ipa:'/k/', word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
-        { ipa:'/g/', word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
+        { ipa:'/p/', phonemeText:'puh', word:'pen',  hl:'<mark>p</mark>en',  zh:'清爆破音', tip:'双唇紧闭，气流突然冲出，注意：没有声带振动（用手摸喉咙感觉不到振动）' },
+        { ipa:'/b/', phonemeText:'buh', word:'bad',  hl:'<mark>b</mark>ad',  zh:'浊爆破音', tip:'双唇紧闭，气流突然冲出，有声带振动（用手摸喉咙能感觉到振动）' },
+        { ipa:'/t/', phonemeText:'tuh', word:'top',  hl:'<mark>t</mark>op',  zh:'清爆破音', tip:'舌尖抵住上齿龈（不是牙齿），突然离开，气流冲出，无声带振动' },
+        { ipa:'/d/', phonemeText:'duh', word:'dog',  hl:'<mark>d</mark>og',  zh:'浊爆破音', tip:'舌尖抵住上齿龈，突然离开，有声带振动，与 /t/ 是一对' },
+        { ipa:'/k/', phonemeText:'kuh', word:'cat',  hl:'<mark>c</mark>at',  zh:'清爆破音', tip:'舌根抵住软腭（口腔后部），突然放开，气流冲出，无声带振动' },
+        { ipa:'/g/', phonemeText:'guh', word:'get',  hl:'<mark>g</mark>et',  zh:'浊爆破音', tip:'舌根抵住软腭，突然放开，有声带振动，与 /k/ 是一对' },
       ]
     },
     fricatives: {
       label: '摩擦音 · 气流通过狭窄通道产生摩擦声',
       items: [
-        { ipa:'/f/', word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
-        { ipa:'/v/', word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
-        { ipa:'/θ/', word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
-        { ipa:'/ð/', word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
-        { ipa:'/s/', word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
-        { ipa:'/z/', word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
-        { ipa:'/ʃ/', word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
-        { ipa:'/ʒ/', word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
-        { ipa:'/h/', word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
+        { ipa:'/f/', phonemeText:'fff',   word:'fan',    hl:'<mark>f</mark>an',    zh:'清摩擦音', tip:'上牙轻触下唇，让气流摩擦而出，无声带振动' },
+        { ipa:'/v/', phonemeText:'vvv',   word:'van',    hl:'<mark>v</mark>an',    zh:'浊摩擦音', tip:'上牙轻触下唇，有声带振动，与 /f/ 是一对' },
+        { ipa:'/θ/', phonemeText:'thin',  word:'thin',   hl:'<mark>th</mark>in',   zh:'清咬舌音', tip:'舌尖轻轻放在上下齿之间，气流摩擦而出，无声带振动。类似"嘶"但是舌头咬住' },
+        { ipa:'/ð/', phonemeText:'the',   word:'this',   hl:'<mark>th</mark>is',   zh:'浊咬舌音', tip:'舌尖轻轻放在上下齿之间，有声带振动，与 /θ/ 是一对。the/this/that都是这个音' },
+        { ipa:'/s/', phonemeText:'sss',   word:'sun',    hl:'<mark>s</mark>un',    zh:'清摩擦音', tip:'舌尖靠近上齿龈，气流摩擦而出，发"嘶"的声音，无声带振动' },
+        { ipa:'/z/', phonemeText:'zzz',   word:'zoo',    hl:'<mark>z</mark>oo',    zh:'浊摩擦音', tip:'与 /s/ 嘴型相同，但有声带振动，发"兹"的声音' },
+        { ipa:'/ʃ/', phonemeText:'shh',   word:'she',    hl:'<mark>sh</mark>e',    zh:'清摩擦音', tip:'舌面抬高，嘴唇微微收圆，发"嘘"的声音，无声带振动' },
+        { ipa:'/ʒ/', phonemeText:'genre', word:'vision', hl:'vi<mark>si</mark>on', zh:'浊摩擦音', tip:'与 /ʃ/ 嘴型相同，但有声带振动，比 /ʃ/ 更有嗡嗡感' },
+        { ipa:'/h/', phonemeText:'hhh',   word:'hat',    hl:'<mark>h</mark>at',    zh:'声门摩擦音',tip:'像轻轻哈气一样，嘴微开，气流从喉咙出来，非常轻柔' },
       ]
     },
     affricates: {
       label: '破擦音 · 爆破音 + 摩擦音的组合',
       items: [
-        { ipa:'/tʃ/', word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
-        { ipa:'/dʒ/', word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
+        { ipa:'/tʃ/', phonemeText:'ch',  word:'chin',  hl:'<mark>ch</mark>in', zh:'清破擦音', tip:'/t/ + /ʃ/ 的快速组合，类似中文"吃"的发音，church/check/cheese' },
+        { ipa:'/dʒ/', phonemeText:'juh', word:'jump',  hl:'<mark>j</mark>ump', zh:'浊破擦音', tip:'/d/ + /ʒ/ 的快速组合，类似中文"知"的声母，job/judge/age' },
       ]
     },
     nasals: {
       label: '鼻音 · 气流从鼻腔通过产生共鸣',
       items: [
-        { ipa:'/m/', word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
-        { ipa:'/n/', word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
-        { ipa:'/ŋ/', word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
+        { ipa:'/m/', phonemeText:'mmm',  word:'man',  hl:'<mark>m</mark>an', zh:'双唇鼻音', tip:'双唇闭合，声带振动，气流从鼻腔出来，发"嗯"（嘴巴不张开）' },
+        { ipa:'/n/', phonemeText:'nnn',  word:'no',   hl:'<mark>n</mark>o',  zh:'齿龈鼻音', tip:'舌尖抵上齿龈，声带振动，气流从鼻腔出来，发"嗯"（舌头要抵住）' },
+        { ipa:'/ŋ/', phonemeText:'ring', word:'sing', hl:'si<mark>ng</mark>',zh:'软腭鼻音', tip:'舌根抵软腭，声带振动，气流从鼻腔出来，通常出现在 -ing -ank 结尾' },
       ]
     },
     approximants: {
       label: '近音 · 发音器官接近但不完全阻塞，气流顺畅',
       items: [
-        { ipa:'/l/', word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
-        { ipa:'/r/', word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
-        { ipa:'/j/', word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
-        { ipa:'/w/', word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
+        { ipa:'/l/', phonemeText:'luh', word:'led', hl:'<mark>l</mark>ed', zh:'边近音', tip:'舌尖抵住上齿龈，声带振动，气流从舌头两侧流出，类似中文"了"' },
+        { ipa:'/r/', phonemeText:'rrr', word:'red', hl:'<mark>r</mark>ed', zh:'近音',   tip:'舌面微微后弯但不颤抖！嘴唇略圆。和中文拼音 r 很不一样，不要颤舌' },
+        { ipa:'/j/', phonemeText:'yuh', word:'yes', hl:'<mark>y</mark>es', zh:'近音',   tip:'舌面高举靠近上腭，像快速发短 i 音后马上接下一个音，year/you/yellow' },
+        { ipa:'/w/', phonemeText:'wuh', word:'wet', hl:'<mark>w</mark>et', zh:'近音',   tip:'双唇收圆向前突出，像快速发短 u 音后马上接下一个音，water/wind/swim' },
       ]
     }
   }
@@ -899,16 +899,25 @@ function initVoices() {
   }
 }
 
-function getBestVoice() {
-  // Prefer local/native English voices
-  const pref = voices.find(v =>
-    (v.lang === 'en-US' || v.lang === 'en-GB') && v.localService
-  );
-  if (pref) return pref;
-  return voices.find(v => v.lang.startsWith('en')) || null;
+function getBestFemaleVoice() {
+  // Preferred female voice names across macOS / Windows / Chrome
+  const preferred = [
+    'Samantha', 'Ava', 'Allison',           // macOS en-US
+    'Google US English',                     // Chrome
+    'Karen',                                 // macOS en-AU
+    'Serena', 'Victoria',                    // macOS en-GB
+    'Google UK English Female',              // Chrome
+    'Zira', 'Jenny', 'Aria', 'Michelle',    // Windows
+  ];
+  for (const name of preferred) {
+    const v = voices.find(v => v.name.includes(name));
+    if (v) return v;
+  }
+  return voices.find(v => v.lang === 'en-US' || v.lang === 'en-GB') ||
+         voices.find(v => v.lang.startsWith('en')) || null;
 }
 
-function speak(word, cardEl) {
+function speak(ph, cardEl) {
   if (!window.speechSynthesis) {
     alert('您的浏览器暂不支持朗读功能，推荐使用 Chrome 浏览器～');
     return;
@@ -916,19 +925,43 @@ function speak(word, cardEl) {
   window.speechSynthesis.cancel();
   if (currentCard) currentCard.classList.remove('playing');
 
-  const utt = new SpeechSynthesisUtterance(word);
-  utt.lang = 'en-US';
-  utt.rate = 0.78;
-  utt.pitch = 1.0;
-  utt.volume = 1.0;
-  const v = getBestVoice();
-  if (v) utt.voice = v;
+  const voice   = getBestFemaleVoice();
+  const hintEl  = cardEl.querySelector('.card-hint');
 
-  utt.onstart = () => { cardEl.classList.add('playing'); currentCard = cardEl; };
-  utt.onend   = () => { cardEl.classList.remove('playing'); currentCard = null; };
-  utt.onerror = () => { cardEl.classList.remove('playing'); currentCard = null; };
+  function makeUtt(text, rate) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang   = 'en-US';
+    u.rate   = rate;
+    u.pitch  = 1.08;
+    u.volume = 1.0;
+    if (voice) u.voice = voice;
+    return u;
+  }
 
-  window.speechSynthesis.speak(utt);
+  const utt1 = makeUtt(ph.phonemeText, 0.58); // 音标音，慢一些
+  const utt2 = makeUtt(ph.word, 0.76);         // 例词，正常语速
+
+  utt1.onstart = () => {
+    cardEl.classList.add('playing');
+    currentCard = cardEl;
+    if (hintEl) hintEl.textContent = '🔊 音标…';
+  };
+  utt2.onstart = () => {
+    if (hintEl) hintEl.textContent = '🔊 例词…';
+  };
+  utt2.onend = () => {
+    cardEl.classList.remove('playing');
+    currentCard = null;
+    if (hintEl) hintEl.textContent = '🔊 音标 → 例词';
+  };
+  utt1.onerror = utt2.onerror = () => {
+    cardEl.classList.remove('playing');
+    currentCard = null;
+    if (hintEl) hintEl.textContent = '🔊 音标 → 例词';
+  };
+
+  window.speechSynthesis.speak(utt1);
+  window.speechSynthesis.speak(utt2);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -949,7 +982,7 @@ function buildCard(ph, type, delayMs) {
     <div class="sound-wave">
       <span></span><span></span><span></span><span></span><span></span>
     </div>
-    <div class="card-hint">🔊 点击发音</div>
+    <div class="card-hint">🔊 音标 → 例词</div>
   `;
 
   // Ripple on click
@@ -961,7 +994,7 @@ function buildCard(ph, type, delayMs) {
     rip.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;
     card.appendChild(rip);
     setTimeout(() => rip.remove(), 600);
-    speak(ph.word, card);
+    speak(ph, card);
   });
 
   // Tip bar on hover
